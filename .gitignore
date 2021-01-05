@@ -1,2 +1,8 @@
 .vscode
 explore/.ipynb_checkpoints
+PowProducer/PowProducer/__pycache__/__init__.cpython-38.pyc
+PowProducer/PowProducer/__pycache__/settings.cpython-38.pyc
+PowProducer/snowview/__pycache__/views.cpython-38.pyc
+PowProducer/snowview/__pycache__/urls.cpython-38.pyc
+PowProducer/snowview/__pycache__/__init__.cpython-38.pyc
+PowProducer/PowProducer/__pycache__/wsgi.cpython-38.pyc
