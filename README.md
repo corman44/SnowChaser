@@ -4,6 +4,6 @@
 
 
 ## Sources
-- https://www.snow-forecast.com/resorts/Mt-Hood-Meadows/6day/mid
-- https://www.skihood.com/the-mountain/conditions
+- OpenWeather
+- NOAA
 
