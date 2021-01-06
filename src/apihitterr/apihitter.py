@@ -13,17 +13,25 @@ def open_weather_hitter(lat, lon):
     
     return result.json()
 
-def noaa_hitter(lat, lon):
+def noaa_hitter(lat=0, lon=0):
     """
-    Get weather data from NOAA API (not defined)
+    Get weather data from NOAA API
     """
     url = 'https://www.ncdc.noaa.gov/cdo-web/api/v2/'
     token = 'LfxZeKJJIQXTfiomXFDkBLrFbiXuARcL'
-    dataset_endpoint = '/datasets'
+    dataset_endpoint = 'datasets'
     
+    header = {'token': token}
+    payload = {}
+
+    result = requests.get(url + dataset_endpoint, headers=header, params=payload)
+    return result.json()
+
     pass
 
 if __name__ == "__main__":
     x = open_weather_hitter(45.330558, -121.711615)
     print(x)
+    y = noaa_hitter()
+    print(y)
     pass
