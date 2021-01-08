@@ -22,6 +22,7 @@ class open_weather_hitter():
 
     def get_current_weather_gps(self, lat, lon):
         payload = self._set_payload_gps(lat,lon)
+        
         #get current weather result of lat lon cooridantes
         result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
         return result.json()
@@ -30,13 +31,6 @@ class open_weather_hitter():
         payload = self._set_payload_city(city)
 
         #get current weather result of lat lon cooridantes
-        result = requests.get(self.url_base + 'city', params=payload, headers=self.header)
-        return result.json()
-
-    def get_current_4day_forecast_gps(self, lat,lon):
-        payload = self._set_payload_gps(lat,lon)
-
-        #get 4 day forecase by gps
         result = requests.get(self.url_base + 'city', params=payload, headers=self.header)
         return result.json()
 
@@ -58,6 +52,7 @@ class open_weather_hitter():
 if __name__ == "__main__":
 
     #Timberline GPS Coords
-    x = open_weather_hitter(45.330558, -121.711615)
-    print(x)
+    x = open_weather_hitter()
+    result=x.get_current_weather_gps(45.330558,-121.711615)
+    print(result)
     pass
