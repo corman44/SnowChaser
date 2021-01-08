@@ -55,6 +55,7 @@ six==1.14.0
 sqlparse==0.4.1
 systemd-python==234
 toml==0.10.2
+twilio==6.50.1
 ubuntu-advantage-tools==20.3
 ubuntu-drivers-common==0.0.0
 ufw==0.36
