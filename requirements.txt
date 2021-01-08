@@ -28,6 +28,7 @@ mccabe==0.6.1
 netifaces==0.10.4
 oauthlib==3.1.0
 olefile==0.46
+pbr==5.5.1
 pexpect==4.6.0
 Pillow==7.0.0
 pycairo==1.16.2
@@ -54,6 +55,7 @@ sip==4.19.21
 six==1.14.0
 sqlparse==0.4.1
 systemd-python==234
+testresources==2.0.1
 toml==0.10.2
 twilio==6.50.1
 ubuntu-advantage-tools==20.3
