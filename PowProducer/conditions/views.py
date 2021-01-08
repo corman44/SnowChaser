@@ -2,6 +2,7 @@ import requests
 import os
 from django.shortcuts import render
 from django.http import HttpResponse
+from twilio.rest import Client
 
 tLineLodgelat = 45.330558
 tLineLodgelng = -121.711615
@@ -37,3 +38,17 @@ def openWeather(request):
 def noaa(request):
     weatherData = noaa_hitter(tLineLodgelat, tLineLodgelng)
     return HttpResponse(weatherData)
+
+def twilioMessage(request):
+    account_sid = os.getenv('TWILIO_SID')
+    auth_token = os.getenv('TWILIO_AUTH_TOKEN')
+    phone_number = os.getenv('TWILIO_PHONE_NUMBER')
+    client = Client(account_sid, auth_token)
+
+    message = client.messages \
+                .create(
+                     body="Gumby",
+                     from_=phone_number,
+                     to='wouldn\'t you like to know'
+                 )
+    return HttpResponse(message)
