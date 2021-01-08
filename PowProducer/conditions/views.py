@@ -1,4 +1,5 @@
 import requests
+import os
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -10,7 +11,7 @@ def open_weather_hitter(lat, lon):
     Get weather data from OpenWeather API
     """
     url_base    = 'http://api.openweathermap.org/data/2.5/'
-    token       = '1a4d180ffc35d8e5f8cd405d6caf99f1'
+    token       = os.getenv('OPEN_WEATHER_TOKEN')
 
     header = {}
     payload = {'appid': token, 'lat': lat, 'lon': lon}   
@@ -23,7 +24,7 @@ def noaa_hitter(lat, lon):
     Get weather data from NOAA API (not defined)
     """
     url = 'https://www.ncdc.noaa.gov/cdo-web/api/v2/'
-    token = 'LfxZeKJJIQXTfiomXFDkBLrFbiXuARcL'
+    token = os.getenv('NOAA_TOKEN')
     dataset_endpoint = '/datasets'
     
     return "foobar"
