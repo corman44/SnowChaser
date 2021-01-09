@@ -31,12 +31,14 @@ class open_weather_hitter():
         #get current weather result of lat lon cooridantes
         try:
             result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
+            pass
         except Exception as e:
             #log exception
             logging.error(traceback.format_exc())
 
             print("retrying request")
             result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
+            pass
 
         if result.status_code == requests.codes.ok:
             return result.json()
@@ -48,8 +50,16 @@ class open_weather_hitter():
         payload = self._set_payload_city(city)
 
         #get current weather result of lat lon cooridantes
-        result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
-        print(result.request.url)
+        try:
+            result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
+            pass
+        except Exception as e:
+            #log exception
+            logging.error(traceback.format_exc())
+
+            print('retrying request')
+            result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
+            pass
 
         if result.status_code == requests.codes.ok:
             return result.json()
