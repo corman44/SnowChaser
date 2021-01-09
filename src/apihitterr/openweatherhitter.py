@@ -1,4 +1,8 @@
 import requests
+import logging
+import traceback
+from requests import exceptions
+from requests.api import request
 
 class open_weather_hitter():
     """
@@ -20,31 +24,51 @@ class open_weather_hitter():
     def __init__(self):
         pass
 
+    #Return current weather based on a GPS location
     def get_current_weather_gps(self, lat, lon):
         payload = self._set_payload_gps(lat,lon)
         
         #get current weather result of lat lon cooridantes
-        result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
-        return result.json()
+        try:
+            result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
+        except Exception as e:
+            #log exception
+            logging.error(traceback.format_exc())
+
+            print("retrying request")
+            result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
+
+        if result.status_code == requests.codes.ok:
+            return result.json()
+        else:
+            return result.status_code
     
+    #Return Current Weather based on a city name
     def get_current_weather_city(self, city):
         payload = self._set_payload_city(city)
 
         #get current weather result of lat lon cooridantes
-        result = requests.get(self.url_base + 'city', params=payload, headers=self.header)
-        return result.json()
+        result = requests.get(self.url_base + 'weather', params=payload, headers=self.header)
+        print(result.request.url)
+
+        if result.status_code == requests.codes.ok:
+            return result.json()
+        else:
+            return result.status_code
 
     #Private method for creating GPS related payload
     def _set_payload_gps(self, lat,lon):
-        payload = self.payload
+        payload = {}
+        payload.update(self.payload)
         payload['lat'] = lat
         payload['lon'] = lon
         return payload
 
     #Private method for creating City related payload
     def _set_payload_city(self, city):
-        payload = self.payload
-        payload['city'] = city
+        payload = {}
+        payload['q'] = city
+        payload.update(self.payload)
         return payload
 
 
@@ -53,6 +77,7 @@ if __name__ == "__main__":
 
     #Timberline GPS Coords
     x = open_weather_hitter()
-    result=x.get_current_weather_gps(45.330558,-121.711615)
-    print(result)
+    print(x.get_current_weather_gps(45.330558,-121.711615))
+    print("")
+    print(x.get_current_weather_city('Government Camp, US'))
     pass
