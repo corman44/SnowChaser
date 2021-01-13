@@ -1,11 +1,12 @@
 import requests
+import os
 
 def noaa_hitter(lat=0, lon=0):
     """
     Get weather data from NOAA API
     """
     url = 'https://www.ncdc.noaa.gov/cdo-web/api/v2/'
-    token = 'LfxZeKJJIQXTfiomXFDkBLrFbiXuARcL'
+    token = os.getenv('NOAA_TOKEN')
     dataset_endpoint = 'datasets'
     
     header = {'token': token}
