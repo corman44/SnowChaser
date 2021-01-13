@@ -1,6 +1,7 @@
 import requests
 import logging
 import traceback
+import os
 from requests import exceptions
 from requests.api import request
 
@@ -17,7 +18,7 @@ class open_weather_hitter():
     """
 
     url_base    = 'http://api.openweathermap.org/data/2.5/'
-    token       = '1a4d180ffc35d8e5f8cd405d6caf99f1'
+    token       = os.getenv('OPEN_WEATHER_TOKEN')
     header = {}
     payload = {'appid': token}
 
