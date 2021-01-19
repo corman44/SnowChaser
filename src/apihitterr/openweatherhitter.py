@@ -27,8 +27,12 @@ class open_weather_hitter():
     def __init__(self) -> None:
         super().__init__()
 
-    #Return current weather based on a GPS location
     def get_current_weather_gps(self, lat, lon):
+        """
+        returns JSON of current weather given lat and lon
+        returns error code if failure occur
+        """
+
         payload = self._set_payload_gps(lat,lon)
         
         #get current weather result of lat lon cooridantes
@@ -48,8 +52,11 @@ class open_weather_hitter():
         else:
             return result.status_code
     
-    #Return Current Weather based on a city name
     def get_current_weather_city(self, city):
+        """
+        returns JSON of current weather given city name
+        returns error code if failure occur
+        """
         payload = self._set_payload_city(city)
 
         #get current weather result of lat lon cooridantes
@@ -71,7 +78,8 @@ class open_weather_hitter():
 
     def get_48hour_forecast_gps(self, lat, lon):
         """
-        Return 48 Hour Hourly forecast based on GPS location
+        return 48 Hour Hourly forecast based on GPS location
+        returns error code if failure
         """
         exclude=b"current,minutely,daily,alerts"
         payload = self._set_payload_gps(lat,lon,exclude)
