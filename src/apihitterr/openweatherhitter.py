@@ -2,8 +2,9 @@ import requests
 import logging
 import traceback
 import os
-from requests import exceptions
-from requests.api import request
+from dotenv import load_dotenv
+load_dotenv('.env')
+
 
 class open_weather_hitter():
     """
