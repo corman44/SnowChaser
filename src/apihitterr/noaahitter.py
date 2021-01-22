@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv('.env')
 
-def noaa_hitter(lat=0, lon=0):
+class noaa_hitter(lat=0, lon=0):
     """
     Get weather data from NOAA API
     """
@@ -12,7 +12,16 @@ def noaa_hitter(lat=0, lon=0):
     dataset_endpoint = 'datasets'
     
     header = {'token': token}
-    payload = {}
+    payload = {'User-Agent': '(myapp.com, foo@foo.com)'}
 
-    result = requests.get(url + dataset_endpoint, headers=header, params=payload)
-    return result.json()
+    def get_48hr_forecast(self , x, y):
+        """
+        returns 48 hour forecasted data for a region otherwise, returns http response
+        """
+        result = requests.get(url + dataset_endpoint, headers=header, params=payload)
+        return result.json()
+
+
+if __name__ == "__main__":
+    
+    pass
