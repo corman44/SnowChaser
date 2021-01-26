@@ -11,21 +11,31 @@ class noaa_hitter():
     """
     url = 'https://api.weather.gov/'
     #token = os.getenv('NOAA_TOKEN')
-    dataset_endpoint = 'datasets'
+    points_endpoint = 'points/'
     
-    #header = {'token': token}
-    payload = {'User-Agent': '(myapp.com, foo@foo.com)'}
+    #payload = {'User-Agent': '(myapp.com, foo@foo.com)'}
 
     def get_48hr_forecast(self , x, y):
         """
         returns 48 hour forecasted data for a region otherwise, returns http response
         """
-        result = requests.get(self.url + self.dataset_endpoint, headers=header, params=payload)
-        return result.json()
+        pass
+        #return result.json()
 
     def get_gridpoints(self, lat, lon):
         #TODO: build out getter for lat lon, return endpoints for different time periods of forecast 
-        ret office, gridX, gridY
+        
+        try:
+            result = requests.get(self.url + self.points_endpoint)
+        except Exception as e:
+            #log exception
+            logging.error(traceback.format_exc())
+
+            print("retrying request")
+        
+        #office = result['office']
+        #return office, gridX, gridY
+        pass
 
 
 if __name__ == "__main__":
