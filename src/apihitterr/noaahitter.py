@@ -1,3 +1,4 @@
+import logging
 import requests
 import os
 from dotenv import load_dotenv
@@ -25,27 +26,30 @@ class noaa_hitter():
     def get_gridpoints(self, lat, lon):
         #TODO: build out getter for lat lon, return endpoints for different time periods of forecast 
         
+        url = 'https://api.weather.gov/'
+        header = {'User-Agent': '(myweatherapp.com, contact@myweatherapp.com)'}
+        payload = {'lat':lat, 'lon':lon}
+
         try:
-            result = requests.get(self.url + self.points_endpoint)
+            result = requests.get(url + 'points/' + str(lat) + ',' + str(lon))
+            print(result.url)
+            print(result.status_code)
+            print(result.content)
         except Exception as e:
             #log exception
             logging.error(traceback.format_exc())
 
             print("retrying request")
+            result = requests.get(url + 'points/' + str(lat) + ',' + str(lon))
         
-        #office = result['office']
-        #return office, gridX, gridY
         pass
 
 
 if __name__ == "__main__":
     lat = 45.330558
     lon = -121.711615
-    url = 'https://api.weather.gov/'
-    header = {'User-Agent': '(myweatherapp.com, contact@myweatherapp.com)'}
-    payload = {'lat':lat, 'lon':lon}
-    ret = requests.get(url + 'points/' + str(lat) + ',' + str(lon))
-    print(ret.url)
-    print(ret.status_code)
-    print(ret.content)
+
+    x = noaa_hitter()
+    x.get_gridpoints(lat,lon)
+
     pass
